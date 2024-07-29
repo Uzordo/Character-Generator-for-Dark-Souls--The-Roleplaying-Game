@@ -1,0 +1,13 @@
+Strength: 16
+Dexterity: 8
+Constitution: 13
+Intelligence :8
+Wisdom: 12
+Charisma: 12
+Base Position: 3
+Temporary Position: 1
+Backstory: You lived by your wits, a gambler, a drunkard, a sot. None liked you, but you didnt care.
+
+Memory: Horses hooves, trampling down on you, imperiously.
+
+Drive: To achieve redemption; you know the darkness in your past lives. Perhaps you can cleanse yourself.
