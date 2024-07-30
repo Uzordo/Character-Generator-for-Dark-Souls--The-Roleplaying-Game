@@ -20,11 +20,9 @@ class TerminalMenu():
                     case "2":
                         break  
       
-    def handle_positions() -> int:
+    def handle_base_position() -> int:
         base_positon: int = 0
-        temporary_position: int = 0
         
-        origin_position_dice: int = 0
         player_level: int = 0
         
         constitution_modifier: int = 0
@@ -34,20 +32,23 @@ class TerminalMenu():
         constitution_modifier = int(input("Give the constitution modifier: "))
         maximum_value_origin_position_dice = int(input("Give the maximum value origin position dice: "))
         player_level = int(input("Give the current player level: "))
-        base_positon = stats_gen.StatsGenerator.generate_base_positon(constitution_modifier, maximum_value_origin_position_dice, player_level)
+        return stats_gen.StatsGenerator.generate_base_positon(constitution_modifier, maximum_value_origin_position_dice, player_level)
+    
+
+    def handle_temporary_position() -> int:
+        
+        origin_position_dice: int = 0
+        player_level: int = 0
         
         print("CALCULATING THE TEMPORARY POSITION")
         origin_position_dice = int(input("Give the origin position dice: "))
-        temporary_position = stats_gen.StatsGenerator.generate_temporary_position(origin_position_dice, player_level)
-        
-        return base_positon, temporary_position
+        player_level = int(input("Give the current player level: "))
+        return stats_gen.StatsGenerator.generate_temporary_position(origin_position_dice, player_level)
         
                         
-    def generate_all_stats() -> list:
-        text: list = []
-        
-        base_position, temporary_position = TerminalMenu.handle_positions()
-        
+    def generate_all_stats() -> list[str]:
+        text: list[str] = []
+                
         strength: str = "Strength: " + str(stats_gen.StatsGenerator.generate_ability())
         text.append(strength)
         dexterity: str = "Dexterity: " + str(stats_gen.StatsGenerator.generate_ability())
@@ -60,9 +61,9 @@ class TerminalMenu():
         text.append(wisdom)
         charisma: str = "Charisma: " + str(stats_gen.StatsGenerator.generate_ability())
         text.append(charisma)
-        base_position_text: str = "Base Position: " + str(base_position)
+        base_position_text: str = "Base Position: " + str(TerminalMenu.handle_base_position())
         text.append(base_position_text)
-        temporary_position_text: str = "Temporary Position: " + str(temporary_position)
+        temporary_position_text: str = "Temporary Position: " + str(TerminalMenu.handle_temporary_position())
         text.append(temporary_position_text)
         backstory: str = "Backstory: " + stats_gen.StatsGenerator.generate_backstory()
         text.append(backstory)
@@ -73,7 +74,7 @@ class TerminalMenu():
         
         return text
 
-    def generate_file(char: list):
+    def generate_file(char: list[str]):
         with open("OUTPUT.txt", "w") as f:
             for text in char:
                 f.write(text + "\n")

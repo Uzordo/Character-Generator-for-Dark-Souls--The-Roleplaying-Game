@@ -26,7 +26,7 @@ class StatsGenerator():
     def generate_temporary_position(origin_position_dice: int, player_level: int) -> int:
         return origin_position_dice * player_level
     
-    def generate_base_positon(constitution_modifier: int, maximum_value_origin_position_dice: int, current_level: int):
+    def generate_base_positon(constitution_modifier: int, maximum_value_origin_position_dice: int, current_level: int) -> int:
         return constitution_modifier + maximum_value_origin_position_dice + current_level
 
     def generate_backstory() -> str:
@@ -34,7 +34,7 @@ class StatsGenerator():
         random_backstory: int = 0
         
         with open("txt/backstories.txt") as f:
-            content = f.readlines()
+            content: list[str] = f.readlines()
         
             random_backstory = random.randint(0, len(content)) 
         
@@ -45,7 +45,7 @@ class StatsGenerator():
         random_memory: int = 0
         
         with open("txt/memories.txt") as f:
-            content = f.readlines()
+            content: list[str] = f.readlines()
         
             random_memory = random.randint(0, len(content))
         
@@ -56,7 +56,7 @@ class StatsGenerator():
         random_drive: int = 0
         
         with open("txt/drives.txt") as f:
-            content = f.readlines()
+            content: list[str] = f.readlines()
         
             random_drive = random.randint(0, len(content))
         
