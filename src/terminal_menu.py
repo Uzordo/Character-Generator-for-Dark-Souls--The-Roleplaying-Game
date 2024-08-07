@@ -1,4 +1,5 @@
 import os
+import platform
 import src.stats_gen as stats_gen
 
 class TerminalMenu():
@@ -15,7 +16,11 @@ class TerminalMenu():
                 match key:
                     case "1":
                         TerminalMenu.generate_file(TerminalMenu.generate_all_stats())
-                        os.system("cls")
+                        
+                        if platform.system() == "Windows":
+                            os.system("cls")
+                        elif platform.system() == "Linux" or platform.system == "Darwin": # I think this will work on Linux and macOS
+                            os.system("clear")
                         print("Character file created!!!!")
                     case "2":
                         break  
@@ -47,31 +52,20 @@ class TerminalMenu():
         
                         
     def generate_all_stats() -> list[str]:
-        text: list[str] = []
-                
-        strength: str = "Strength: " + str(stats_gen.StatsGenerator.generate_ability())
-        text.append(strength)
-        dexterity: str = "Dexterity: " + str(stats_gen.StatsGenerator.generate_ability())
-        text.append(dexterity)
-        constitution: str = "Constitution: " + str(stats_gen.StatsGenerator.generate_ability())
-        text.append(constitution)
-        intelligence: str =  "Intelligence :" + str(stats_gen.StatsGenerator.generate_ability())
-        text.append(intelligence)
-        wisdom: str = "Wisdom: " + str(stats_gen.StatsGenerator.generate_ability())
-        text.append(wisdom)
-        charisma: str = "Charisma: " + str(stats_gen.StatsGenerator.generate_ability())
-        text.append(charisma)
-        base_position_text: str = "Base Position: " + str(TerminalMenu.handle_base_position())
-        text.append(base_position_text)
-        temporary_position_text: str = "Temporary Position: " + str(TerminalMenu.handle_temporary_position())
-        text.append(temporary_position_text)
-        backstory: str = "Backstory: " + stats_gen.StatsGenerator.generate_backstory()
-        text.append(backstory)
-        memory: str = "Memory: " + stats_gen.StatsGenerator.generate_memories()
-        text.append(memory)
-        drive: str = "Drive: " + stats_gen.StatsGenerator.generate_drives()       
-        text.append(drive)
-        
+        text: list[str] = [
+            "Strength: " + str(stats_gen.StatsGenerator.generate_ability()),
+            "Dexterity: " + str(stats_gen.StatsGenerator.generate_ability()),
+            "Constitution: " + str(stats_gen.StatsGenerator.generate_ability()),
+            "Intelligence :" + str(stats_gen.StatsGenerator.generate_ability()),
+            "Wisdom: " + str(stats_gen.StatsGenerator.generate_ability()),
+            "Charisma: " + str(stats_gen.StatsGenerator.generate_ability()),
+            "Base Position: " + str(TerminalMenu.handle_base_position()),
+            "Temporary Position: " + str(TerminalMenu.handle_temporary_position()),
+            "Backstory: " + stats_gen.StatsGenerator.generate_backstory(),
+            "Memory: " + stats_gen.StatsGenerator.generate_memories(),
+            "Drive: " + stats_gen.StatsGenerator.generate_drives()
+        ]
+
         return text
 
     def generate_file(char: list[str]):
